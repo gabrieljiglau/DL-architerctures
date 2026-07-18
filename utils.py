@@ -7,6 +7,10 @@ from torch.utils.data import DataLoader, random_split
 
 def load_cifar(batch_size=64, num_workers=4):
 
+    """
+    :return: train_loader, valid_loader, test_loader, classes
+    """
+
     transform = transforms.Compose([
         transforms.ToTensor(),
         transforms.RandomCrop(32, padding=4, padding_mode='reflect'),

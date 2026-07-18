@@ -46,6 +46,7 @@ class CNN(nn.Module):
 
     def forward(self, x):
 
+
         # print(f"shape(x) = {np.shape(x)}")
         for layer in self.layers:
             x = layer(x)
