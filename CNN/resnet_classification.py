@@ -4,7 +4,7 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 
-from utils import load_cifar, train_net
+from utils import load_cifar, train_net, validate_net
 
 class ResidualBlock(nn.Module):
 
@@ -108,11 +108,6 @@ class ResidualNetwork(nn.Module):
 
 if __name__ == '__main__':
 
-    # TensorDataset class from pytorch
-
-    # TODO: i) plots with matplotlib
-    # TODO: ii) transfer learning + decision trees / logistic regression
-
     train_loader, valid_loader, test_loader, num_classes = load_cifar(batch_size=64, num_workers=2)
     # num_classes = ['plane', 'vehicle', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck'] !!
 
@@ -130,4 +125,8 @@ if __name__ == '__main__':
     if not os.path.exists(model_path):
         train_net(resnet8, num_epochs=20, train_loader=train_loader, valid_loader=valid_loader, optimizer=optim,
                   loss_metric=nn.CrossEntropyLoss(), model_path=model_path)
+
+    # ~70% accuracy
+    if os.path.exists(model_path):
+        validate_net(resnet8, test_loader, model_path, nn.CrossEntropyLoss())
 

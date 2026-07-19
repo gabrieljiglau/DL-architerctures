@@ -86,25 +86,9 @@ if __name__ == '__main__':
 
     train_loader, valid_loader, test_loader, classes = load_cifar(batch_size=64, num_workers=2)
 
-    if not os.path.exists('models/net_cifar10.pt'):
+    if not os.path.exists('models/cnn_cifar10.pt'):
         train_net(net, num_epochs=20, train_loader=train_loader, valid_loader=valid_loader, optimizer=optimizer,
-                  loss_metric=nn.CrossEntropyLoss(), model_path='models/net_cifar10.pt')
+                  loss_metric=nn.CrossEntropyLoss(), model_path='models/cnn_cifar10.pt')
 
     if os.path.exists('models/net_cifar10.pt'):
-        validate_net(net, test_loader, 'models/net_cifar10.pt', nn.CrossEntropyLoss())
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
+        validate_net(net, test_loader, 'models/cnn_cifar10.pt', nn.CrossEntropyLoss())
